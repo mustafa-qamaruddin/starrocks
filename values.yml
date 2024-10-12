@@ -159,7 +159,7 @@ starrocks:
       # Note: make sure the prometheus operator is installed in your cluster.
       # If prometheus is not installed by operator, you can add annotations on k8s service to expose metrics.
       # see https://github.com/StarRocks/starrocks-kubernetes-operator/blob/main/doc/integration/integration-prometheus-grafana.md#51-turn-on-the-prometheus-metrics-scrape-by-adding-annotations for more details.
-      enabled: true
+      enabled: false
       # Prometheus ServiceMonitor labels
       labels: {}
         # scraper: prometheus-operator
@@ -413,7 +413,7 @@ starrocks:
     config: |
       LOG_DIR = ${STARROCKS_HOME}/log
       DATE = "$(date +%Y%m%d-%H%M%S)"
-      JAVA_OPTS="-Dlog4j2.formatMsgNoLookups=true -Xmx8192m -XX:+UseG1GC -Xlog:gc*:${LOG_DIR}/fe.gc.log.$DATE:time"
+      JAVA_OPTS="-Dlog4j2.formatMsgNoLookups=true -Xmx750m -XX:+UseG1GC -Xlog:gc*:${LOG_DIR}/fe.gc.log.$DATE:time"
       http_port = 8030
       rpc_port = 9020
       query_port = 9030
