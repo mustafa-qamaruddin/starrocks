@@ -1,5 +1,11 @@
 -- retail_transactions.sql
 
+
+CREATE SCHEMA retail;
+
+USE retail;
+
+
 -- ====================================
 -- Step 1: Create the Tables
 -- ====================================
@@ -15,8 +21,8 @@ DUPLICATE KEY(user_id)
 COMMENT "Users Table"
 DISTRIBUTED BY HASH(user_id) BUCKETS 4
 PROPERTIES (
-    "replication_allocation" = "tag.location.default: 3",
-    "storage_format" = "V2"
+    "storage_format" = "V2",
+    "replication_num" = "1"
 );
 
 -- Create Items Table
@@ -29,8 +35,8 @@ DUPLICATE KEY(item_id)
 COMMENT "Items Table"
 DISTRIBUTED BY HASH(item_id) BUCKETS 4
 PROPERTIES (
-    "replication_allocation" = "tag.location.default: 3",
-    "storage_format" = "V2"
+    "storage_format" = "V2",
+    "replication_num" = "1"
 );
 
 -- Create Stores Table
@@ -43,8 +49,8 @@ DUPLICATE KEY(store_id)
 COMMENT "Stores Table"
 DISTRIBUTED BY HASH(store_id) BUCKETS 4
 PROPERTIES (
-    "replication_allocation" = "tag.location.default: 3",
-    "storage_format" = "V2"
+    "storage_format" = "V2",
+    "replication_num" = "1"
 );
 
 -- Create Transactions Table
@@ -61,8 +67,8 @@ DUPLICATE KEY(transaction_id)
 COMMENT "Transactions Table"
 DISTRIBUTED BY HASH(transaction_id) BUCKETS 4
 PROPERTIES (
-    "replication_allocation" = "tag.location.default: 3",
-    "storage_format" = "V2"
+    "storage_format" = "V2",
+    "replication_num" = "1"
 );
 
 -- ====================================

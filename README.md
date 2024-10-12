@@ -1,3 +1,11 @@
+## Screenshots
+
+### Screenshot 1
+![Screenshot 1](images/Screenshot_01.png)
+
+### Screenshot 2
+![Screenshot 2](images/Screenshot_02.png)
+
 # Links
 
 - https://github.com/StarRocks/starrocks-kubernetes-operator/tree/main/examples/starrocks
@@ -23,7 +31,7 @@ helm repo update
 
 helm upgrade --install -f  /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
 
-helm install --upgrade -f /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
+helm install -f /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
 
 kubectl --namespace default get starrockscluster -l "cluster=kube-starrocks"
 
