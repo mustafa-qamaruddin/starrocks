@@ -1,3 +1,5 @@
+**⚠️ Warning: If you need to expose multiple ports simultaneously (e.g., port 8030 for StarRocks and another port for Grafana), consider using Docker Compose instead of Kubernetes for easier management.**
+
 ## Screenshots
 
 ### Screenshot 1
