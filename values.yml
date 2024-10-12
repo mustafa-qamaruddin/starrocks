@@ -366,12 +366,12 @@ starrocks:
     # resources for fe pod.
     resources:
       requests:
-        cpu: "1"
+        cpu: 2
         memory: 2Gi
       # If you want to remove one resource limit, e.g. cpu, you can it to cpu: "unlimited".
       limits:
-        cpu: 1
-        memory: 1Gi
+        cpu: 2
+        memory: 2Gi
     # fe storageSpec for persistent metadata.
     # Note: Once set, the following fields will not be allowed to be modified.
     storageSpec:
@@ -917,11 +917,11 @@ starrocks:
     # resources for be pod.
     resources:
       requests:
-        cpu: "1"
+        cpu: 2
         memory: 2Gi
       # If you want to remove one resource limit, e.g. cpu, you can it to cpu: "unlimited".
       limits:
-        cpu: 1
+        cpu: 2
         memory: 2Gi
     # be storageSpec for persistent storage.
     # Note: Once set, the following fields will not be allowed to be modified.
