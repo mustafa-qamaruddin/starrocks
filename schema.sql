@@ -6,47 +6,64 @@
 
 -- Create Users Table
 CREATE TABLE IF NOT EXISTS users (
-    user_id INT PRIMARY KEY,
+    user_id INT NOT NULL,
     user_name VARCHAR(100),
     email VARCHAR(100),
     created_at DATE
 ) ENGINE=OLAP
 DUPLICATE KEY(user_id)
-DISTRIBUTED BY HASH(user_id) BUCKETS 4;
+COMMENT "Users Table"
+DISTRIBUTED BY HASH(user_id) BUCKETS 4
+PROPERTIES (
+    "replication_allocation" = "tag.location.default: 3",
+    "storage_format" = "V2"
+);
 
 -- Create Items Table
 CREATE TABLE IF NOT EXISTS items (
-    item_id INT PRIMARY KEY,
+    item_id INT NOT NULL,
     item_name VARCHAR(100),
     price DECIMAL(10, 2)
 ) ENGINE=OLAP
 DUPLICATE KEY(item_id)
-DISTRIBUTED BY HASH(item_id) BUCKETS 4;
+COMMENT "Items Table"
+DISTRIBUTED BY HASH(item_id) BUCKETS 4
+PROPERTIES (
+    "replication_allocation" = "tag.location.default: 3",
+    "storage_format" = "V2"
+);
 
 -- Create Stores Table
 CREATE TABLE IF NOT EXISTS stores (
-    store_id INT PRIMARY KEY,
+    store_id INT NOT NULL,
     store_name VARCHAR(100),
     location VARCHAR(100)
 ) ENGINE=OLAP
 DUPLICATE KEY(store_id)
-DISTRIBUTED BY HASH(store_id) BUCKETS 4;
+COMMENT "Stores Table"
+DISTRIBUTED BY HASH(store_id) BUCKETS 4
+PROPERTIES (
+    "replication_allocation" = "tag.location.default: 3",
+    "storage_format" = "V2"
+);
 
 -- Create Transactions Table
 CREATE TABLE IF NOT EXISTS transactions (
-    transaction_id INT PRIMARY KEY,
+    transaction_id INT NOT NULL,
     user_id INT,
     item_id INT,
     store_id INT,
     transaction_date DATE,
     quantity INT,
-    total_amount DECIMAL(10, 2),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (item_id) REFERENCES items(item_id),
-    FOREIGN KEY (store_id) REFERENCES stores(store_id)
+    total_amount DECIMAL(10, 2)
 ) ENGINE=OLAP
 DUPLICATE KEY(transaction_id)
-DISTRIBUTED BY HASH(transaction_id) BUCKETS 4;
+COMMENT "Transactions Table"
+DISTRIBUTED BY HASH(transaction_id) BUCKETS 4
+PROPERTIES (
+    "replication_allocation" = "tag.location.default: 3",
+    "storage_format" = "V2"
+);
 
 -- ====================================
 -- Step 2: Insert Sample Data
