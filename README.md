@@ -28,7 +28,7 @@ helm repo update
 helm install -f /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
 kubectl --namespace default get starrockscluster -l "cluster=kube-starrocks"
 
-MBP-von-new-mac:~ mustafa$ kubectl port-forward pods/kube-starrocks-fe-0 9030:9030
+kubectl port-forward pods/kube-starrocks-fe-0 9030:9030
 
 ´´´
 

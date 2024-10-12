@@ -366,8 +366,8 @@ starrocks:
     # resources for fe pod.
     resources:
       requests:
-        cpu: "0.25"
-        memory: 0.25Gi
+        cpu: "1"
+        memory: 2Gi
       # If you want to remove one resource limit, e.g. cpu, you can it to cpu: "unlimited".
       limits:
         cpu: 1
@@ -795,7 +795,7 @@ starrocks:
   # spec for component be, provide storage and compute function.
   starrocksBeSpec:
     # number of replicas to deploy.
-    replicas: 3
+    replicas: 1
     image:
       # image sliced by "repository:tag"
       repository: starrocks/be-ubuntu
@@ -917,12 +917,12 @@ starrocks:
     # resources for be pod.
     resources:
       requests:
-        cpu: "0.25"
-        memory: 0.25Gi
+        cpu: "1"
+        memory: 2Gi
       # If you want to remove one resource limit, e.g. cpu, you can it to cpu: "unlimited".
       limits:
         cpu: 1
-        memory: 1Gi
+        memory: 2Gi
     # be storageSpec for persistent storage.
     # Note: Once set, the following fields will not be allowed to be modified.
     storageSpec:
