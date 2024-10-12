@@ -11,21 +11,20 @@
 
 ´´´shell
 
-minikube start --memory 7854 --cpus=4
+minikube start --memory 7854 --cpus=4 --driver=docker
 
 
 
 minikube config set cpus 4
 minikube config set memory 7854
 
-
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-helm install prometheus prometheus-community/prometheus
-
 helm repo add starrocks https://starrocks.github.io/starrocks-kubernetes-operator
 helm repo update
-helm install -f /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
+
+helm upgrade --install -f  /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
+
+helm install --upgrade -f /Users/mustafa/Documents/starrocks-project/values.yml starrocks starrocks/kube-starrocks
+
 kubectl --namespace default get starrockscluster -l "cluster=kube-starrocks"
 
 kubectl port-forward pods/kube-starrocks-fe-0 9030:9030
