@@ -13,6 +13,7 @@
 
 # Links
 
+- https://github.com/StarRocks/starrocks-kubernetes-operator/blob/main/doc/local_installation_how_to.md
 - https://github.com/StarRocks/starrocks-kubernetes-operator/tree/main/examples/starrocks
 - https://github.com/StarRocks/starrocks-kubernetes-operator/tree/main/doc
 - https://docs.starrocks.io/docs/deployment/helm/
