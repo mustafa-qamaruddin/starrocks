@@ -1,5 +1,7 @@
 **⚠️ Warning: If you need to expose multiple ports simultaneously (e.g., port 8030 for StarRocks and another port for Grafana), consider using Docker Compose instead of Kubernetes for easier management.**
 
+**⚠️ Warning: Configurations for StarRocks Frontend/Backend could better be loaded from external files, but that requires forking the main chart, since Helm functions work only inside chart and not values files. https://helm.sh/docs/chart_template_guide/accessing_files/ **
+
 ## Screenshots
 
 ### Screenshot 1
@@ -19,7 +21,7 @@
 
 # Setup
 
-´´´shell
+´´´
 
 minikube start --memory 7854 --cpus=4 --driver=docker
 
