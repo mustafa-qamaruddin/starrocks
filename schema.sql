@@ -21,8 +21,7 @@ DUPLICATE KEY(user_id)
 COMMENT "Users Table"
 DISTRIBUTED BY HASH(user_id) BUCKETS 4
 PROPERTIES (
-    "storage_format" = "V2",
-    "replication_num" = "1"
+    "storage_format" = "V2"
 );
 
 -- Create Items Table
@@ -35,8 +34,7 @@ DUPLICATE KEY(item_id)
 COMMENT "Items Table"
 DISTRIBUTED BY HASH(item_id) BUCKETS 4
 PROPERTIES (
-    "storage_format" = "V2",
-    "replication_num" = "1"
+    "storage_format" = "V2"
 );
 
 -- Create Stores Table
@@ -49,8 +47,7 @@ DUPLICATE KEY(store_id)
 COMMENT "Stores Table"
 DISTRIBUTED BY HASH(store_id) BUCKETS 4
 PROPERTIES (
-    "storage_format" = "V2",
-    "replication_num" = "1"
+    "storage_format" = "V2"
 );
 
 -- Create Transactions Table
@@ -67,8 +64,7 @@ DUPLICATE KEY(transaction_id)
 COMMENT "Transactions Table"
 DISTRIBUTED BY HASH(transaction_id) BUCKETS 4
 PROPERTIES (
-    "storage_format" = "V2",
-    "replication_num" = "1"
+    "storage_format" = "V2"
 );
 
 -- ====================================
@@ -136,13 +132,19 @@ ON
 
 -- 3. Join all tables to get full transaction details including user, item, and store information
 SELECT 
-    t.transaction_id, 
-    u.user_name, 
-    i.item_name, 
-    s.store_name, 
-    t.quantity, 
-    t.total_amount, 
-    t.transaction_date 
+    t.transaction_id
+  , 
+    u.user_name
+  , 
+    i.item_name
+  , 
+    s.store_name
+  , 
+    t.quantity
+  , 
+    t.total_amount
+  , 
+    t.transaction_date
 FROM 
     transactions t
 JOIN 
@@ -157,3 +159,5 @@ JOIN
     stores s 
 ON 
     t.store_id = s.store_id;
+
+ADMIN SHOW FRONTEND CONFIG LIKE "%default_replication_num%";
