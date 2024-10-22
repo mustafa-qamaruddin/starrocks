@@ -106,3 +106,21 @@ Eventually: Removed all references to redis
 ```
 
 Solution: Add celery beat
+
+## Superset Secret
+
+```
+$ kubectl logs -f  pods/superset-celerybeat-7d68859955-j9pk5
+
+Defaulted container "superset-celerybeat" out of: superset-celerybeat, wait-for-postgres (init)
+--------------------------------------------------------------------------------
+                                    WARNING
+--------------------------------------------------------------------------------
+A Default SECRET_KEY was detected, please use superset_config.py to override it.
+Use a strong complex alphanumeric string and use a tool to help you generate 
+a sufficiently random sequence, ex: openssl rand -base64 42
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Refusing to start due to insecure SECRET_KEY
+Loaded your LOCAL configuration at [/app/pythonpath/superset_config.py]
+``````
