@@ -63,6 +63,14 @@ helm uninstall superset
 * https://superset.apache.org/docs/installation/kubernetes/
 * https://github.com/apache/superset/blob/master/helm/superset/values.yaml
 
+
+# S3 Proxy
+
+´´´
+helm repo add radar-base https://radar-base.github.io/radar-helm-charts
+helm install -f /Users/mustafa/Documents/starrocks-project/s3-proxy-values.yml my-s3-proxy radar-base/s3-proxy --version 0.4.2
+´´´
+
 # Known Issues
 
 ## Redis Dependency
