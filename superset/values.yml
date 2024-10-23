@@ -94,13 +94,13 @@ extraEnvRaw: []
   #       key: password
 
 # -- Extra environment variables to pass as secrets
-extraSecretEnv: {}
+extraSecretEnv:
   # MAPBOX_API_KEY: ...
   # # Google API Keys: https://console.cloud.google.com/apis/credentials
   # GOOGLE_KEY: ...
   # GOOGLE_SECRET: ...
   #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
-  #  SUPERSET_SECRET_KEY: 'CHANGE_ME_TO_A_COMPLEX_RANDOM_SECRET'
+  SUPERSET_SECRET_KEY: 'Dz1gegSdxprX9/3b0IegzpsqsVGDaQBlvfS60fqqmD/ZZqafQswVQ61V'
 
 # -- Extra files to mount on `/app/pythonpath`
 extraConfigs: {}
@@ -293,7 +293,7 @@ supersetNode:
       command:
         - /bin/sh
         - -c
-        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -timeout 120s
+        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -wait "tcp://$REDIS_HOST:$REDIS_PORT" -timeout 120s
 
   # -- Launch additional containers into supersetNode pod
   extraContainers: []
@@ -391,7 +391,7 @@ supersetWorker:
       command:
         - /bin/sh
         - -c
-        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -timeout 120s
+        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -wait "tcp://$REDIS_HOST:$REDIS_PORT" -timeout 120s
   # -- Launch additional containers into supersetWorker pod
   extraContainers: []
   # -- Annotations to be added to supersetWorker deployment
@@ -473,7 +473,7 @@ supersetCeleryBeat:
       command:
         - /bin/sh
         - -c
-        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -timeout 120s
+        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -wait "tcp://$REDIS_HOST:$REDIS_PORT" -timeout 120s
   # -- Launch additional containers into supersetCeleryBeat pods
   extraContainers: []
   # -- Annotations to be added to supersetCeleryBeat deployment
@@ -566,7 +566,7 @@ supersetCeleryFlower:
       command:
         - /bin/sh
         - -c
-        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -timeout 120s
+        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -wait "tcp://$REDIS_HOST:$REDIS_PORT" -timeout 120s
   # -- Launch additional containers into supersetCeleryFlower pods
   extraContainers: []
   # -- Annotations to be added to supersetCeleryFlower deployment
@@ -721,7 +721,7 @@ init:
       command:
         - /bin/sh
         - -c
-        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -timeout 120s
+        - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -wait "tcp://$REDIS_HOST:$REDIS_PORT" -timeout 120s
   # -- A Superset init script
   # @default -- a script to create admin user and initialize roles
   initscript: |-
@@ -819,7 +819,7 @@ redis:
   ## If you are bringing your own redis, you can set the host in supersetNode.connections.redis_host
   ##
   ## Set to false if bringing your own redis.
-  enabled: false
+  enabled: true
   ##
   ## Set architecture to standalone/replication
   architecture: standalone

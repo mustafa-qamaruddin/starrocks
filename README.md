@@ -5,6 +5,9 @@
 
 ## Screenshots
 
+### Screenshot 3
+![Screenshot 3](images/Screenshot_03.png)
+
 ### Screenshot 1
 ![Screenshot 1](images/Screenshot_01.png)
 
@@ -49,6 +52,8 @@ kubectl port-forward pods/kube-starrocks-fe-0 9030:9030
 helm repo add superset https://apache.github.io/superset
 helm search repo superset
 helm upgrade --install --values /Users/mustafa/Documents/starrocks-project/superset/values.yml superset superset/superset
+
+kubectl port-forward service/superset 8088:8088 --namespace default
 
 helm uninstall superset
 ```
@@ -123,4 +128,16 @@ a sufficiently random sequence, ex: openssl rand -base64 42
 --------------------------------------------------------------------------------
 Refusing to start due to insecure SECRET_KEY
 Loaded your LOCAL configuration at [/app/pythonpath/superset_config.py]
+``````
+
+Solution: add a random seed for the SECRET_KEY
+
+```
+extraSecretEnv:
+  # MAPBOX_API_KEY: ...
+  # # Google API Keys: https://console.cloud.google.com/apis/credentials
+  # GOOGLE_KEY: ...
+  # GOOGLE_SECRET: ...
+  #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
+  SUPERSET_SECRET_KEY: 'super_random_secret_key'
 ``````
