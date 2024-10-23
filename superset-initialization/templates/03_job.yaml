@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-files-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: copy-files
+          image: {{ .Values.copyContainer.image }}
+          command: {{ .Values.copyContainer.command }}
+          args: {{ .Values.copyContainer.args }}
+          volumeMounts:
+            - name: host-pv
+              mountPath: {{ .Values.copyContainer.hostMountPath }}
+            - name: data-pvc
+              mountPath: {{ .Values.copyContainer.volumeMountPath }}
+      restartPolicy: Never
+      volumes:
+        - name: host-pv
+          hostPath:
+            path: {{ .Values.pv.hostPath }}   # Reference the actual PVC for the host-pv
+        - name: data-pvc
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvc.name }}  # Reference the actual PVC for the data-pvc

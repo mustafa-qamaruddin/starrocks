@@ -58,6 +58,18 @@ kubectl port-forward service/superset 8088:8088 --namespace default
 helm uninstall superset
 ```
 
+Add StarRocks Connection:
+
+````
+kube-starrocks-fe-service:8030
+``
+
+# Superset Init Container
+
+```
+helm install superset-init-job ./superset-initialization
+```
+
 # Superset Links
 
 * https://superset.apache.org/docs/installation/kubernetes/
@@ -148,4 +160,4 @@ extraSecretEnv:
   # GOOGLE_SECRET: ...
   #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
   SUPERSET_SECRET_KEY: 'super_random_secret_key'
-``````
+```

@@ -1,0 +1,19 @@
+# Define the PV name
+pv:
+  name: host-pv
+  size: 1Gi
+  hostPath: /Users/mustafa/Documents/starrocks-project/superset-initialization/config
+
+# Define the PVC name
+pvc:
+  name: data-pvc
+  size: 1Gi
+  storageClass: standard
+
+# Container that performs the copy operation
+copyContainer:
+  image: busybox
+  command: ["/bin/sh", "-c"]  # Use the full path to sh
+  args: ["cp -r /host/* /data"]  # Command to copy files
+  volumeMountPath: /data
+  hostMountPath: /host
