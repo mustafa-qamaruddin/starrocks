@@ -9,7 +9,15 @@ spec:
         - name: superset-init-job
           image: {{ .Values.job.image }}
           command: ["/bin/sh"]                   # {  { .Values.job.command | toYaml | indent 12}  }
-          args: ["-c", "ls /;ls /host; sleep 36000; cp -r /host/* /data;"]               # # {  { .Values.job.args | toYaml | indent 12}  }
+          args: # # {  { .Values.job.args | toYaml | indent 12}  }
+           - -c
+           - >
+             apk add --no-cache unzip;
+             ls /;
+             ls /host;
+             mkdir -p /host/unzipped;
+             unzip /host/config.zip -d /host/unzipped;
+             cp -r /host/unzipped/* /data;      
           volumeMounts:
             - name: host-pvc
               mountPath: {{ .Values.job.srcMountPath }}

@@ -2,29 +2,25 @@
 pv1:
   name: host-pv
   size: 1Gi
-  hostPath: /Users/mustafa/Documents/starrocks-project/superset-initialization/config
+  hostPath: /mnt/src
 
 # Define the PVC name
 pvc1:
   name: host-pvc
   size: 1Gi
-  storageClass: standard
 
 pv2:
   name: data-pv
   size: 1Gi
-  hostPath: /Users/mustafa/Documents/target
+  hostPath: /mnt/tgt
 
 # Define the PVC name
 pvc2:
   name: data-pvc
   size: 1Gi
-  storageClass: standard
 
 # Container that performs the copy operation
 job:
-  image: busybox
-  command: ["/bin/sh"]
-  args: ["-c", "cp -r /host/* /data"]
+  image: alpine
   srcMountPath: /host
   tgtMountPath: /data

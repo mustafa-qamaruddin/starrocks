@@ -8,7 +8,7 @@ spec:
   resources:
     requests:
       storage: {{ .Values.pvc1.size }}
-  storageClassName: {{ .Values.pvc1.storageClass }}
+  storageClassName: manual
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,4 +20,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.pvc2.size }}
-  storageClassName: {{ .Values.pvc2.storageClass }}
+  storageClassName: manual
+

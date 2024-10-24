@@ -60,11 +60,13 @@ helm uninstall superset
 
 Add StarRocks Connection:
 
-````
+```
 kube-starrocks-fe-service:8030
-``
+``````
 
 # Superset Init Container
+
+In a production cluster, you would not use hostPath. Instead a cluster administrator would provision a network resource like a Google Compute Engine persistent disk, an NFS share, or an Amazon Elastic Block Store volume. Cluster administrators can also use StorageClasses to set up dynamic provisioning.
 
 Another possibility is to mount the resources directly with a host mount path to the superset volumes
 Separation for future extensibility to add a kubernetes operator and for illustrative prototype purpose
@@ -72,19 +74,25 @@ Separation for ease of testing without messing around with the Superset helm cha
 The question is how do you get the resources dats folder mounted on the prod cluster? via Flux?
 
 ```
+minikube ssh
+sudo mkdir /mnt/data
+sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+cat /mnt/data/index.html
 
-minikube mount /Users/mustafa/Documents/starrocks-project/superset-initialization/config:/mnt/superset-initialization
-minikube mount /Users/mustafa/Documents/target:/mnt/target
+echo $(minikube ip)
 
+minikube cp /Users/mustafa/Documents/starrocks-project/superset-initialization/config.zip /mnt/src/config.zip
 
 helm install superset-init-job ./superset-initialization
 helm uninstall superset-init-job
 ```
 
+
 # Superset Links
 
 * https://superset.apache.org/docs/installation/kubernetes/
 * https://github.com/apache/superset/blob/master/helm/superset/values.yaml
+* https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
 
 
 # S3 Proxy
