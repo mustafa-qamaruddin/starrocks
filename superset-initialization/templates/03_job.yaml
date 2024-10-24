@@ -1,25 +1,25 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: copy-files-job
+  name: superset-init-job
 spec:
   template:
     spec:
       containers:
-        - name: copy-files
+        - name: superset-init-job
           image: {{ .Values.job.image }}
-          command: ["/bin/sh"] # {{ .Values.job.command | toYaml | indent 12}}
-          args: ["-c", "cp -r /host/* /data"] # {{ .Values.job.args | toYaml | indent 12}}
+          command: ["/bin/sh"]                   # {  { .Values.job.command | toYaml | indent 12}  }
+          args: ["-c", "ls /;ls /host; sleep 36000;"]               # cp -r /host/* /data"]    # {  { .Values.job.args | toYaml | indent 12}  }
           volumeMounts:
-            - name: host-pv
-              mountPath: {{ .Values.job.hostMountPath }}
+            - name: host-pvc
+              mountPath: {{ .Values.job.srcMountPath }}
             - name: data-pvc
-              mountPath: {{ .Values.job.volumeMountPath }}
+              mountPath: {{ .Values.job.tgtMountPath }}
       restartPolicy: Never
       volumes:
-        - name: host-pv
-          hostPath:
-            path: {{ .Values.pv.hostPath }}   # Reference the actual PVC for the host-pv
+        - name: host-pvc
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvc1.name }}
         - name: data-pvc
           persistentVolumeClaim:
-            claimName: {{ .Values.pvc.name }}  # Reference the actual PVC for the data-pvc
+            claimName: {{ .Values.pvc2.name }}

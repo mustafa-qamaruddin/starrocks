@@ -1,11 +1,23 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ .Values.pv.name }}
+  name: {{ .Values.pv1.name }}
 spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: {{ .Values.pv.size }}
+    storage: {{ .Values.pv1.size }}
   hostPath:
-    path: {{ .Values.pv.hostPath }}
+    path: {{ .Values.pv1.hostPath }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.pv2.name }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: {{ .Values.pv2.size }}
+  hostPath:
+    path: {{ .Values.pv2.hostPath }}

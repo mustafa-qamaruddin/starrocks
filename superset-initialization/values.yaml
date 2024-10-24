@@ -1,11 +1,22 @@
 # Define the PV name
-pv:
+pv1:
   name: host-pv
   size: 1Gi
   hostPath: /Users/mustafa/Documents/starrocks-project/superset-initialization/config
 
 # Define the PVC name
-pvc:
+pvc1:
+  name: host-pvc
+  size: 1Gi
+  storageClass: standard
+
+pv2:
+  name: data-pv
+  size: 1Gi
+  hostPath: /Users/mustafa/Documents/target
+
+# Define the PVC name
+pvc2:
   name: data-pvc
   size: 1Gi
   storageClass: standard
@@ -15,5 +26,5 @@ job:
   image: busybox
   command: ["/bin/sh"]
   args: ["-c", "cp -r /host/* /data"]
-  volumeMountPath: /data
-  hostMountPath: /host
+  srcMountPath: /host
+  tgtMountPath: /data

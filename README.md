@@ -66,6 +66,10 @@ kube-starrocks-fe-service:8030
 
 # Superset Init Container
 
+Another possibility is to mount the resources directly with a host mount path to the superset volumes
+Separation for future extensibility to add a kubernetes operator and for illustrative prototype purpose
+Separation for ease of testing without messing around with the Superset helm chart
+
 ```
 helm install superset-init-job ./superset-initialization
 ```
