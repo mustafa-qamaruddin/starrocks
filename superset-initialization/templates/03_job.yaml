@@ -7,14 +7,14 @@ spec:
     spec:
       containers:
         - name: copy-files
-          image: {{ .Values.copyContainer.image }}
-          command: {{ .Values.copyContainer.command }}
-          args: {{ .Values.copyContainer.args }}
+          image: {{ .Values.job.image }}
+          command: ["/bin/sh"] # {{ .Values.job.command | toYaml | indent 12}}
+          args: ["-c", "cp -r /host/* /data"] # {{ .Values.job.args | toYaml | indent 12}}
           volumeMounts:
             - name: host-pv
-              mountPath: {{ .Values.copyContainer.hostMountPath }}
+              mountPath: {{ .Values.job.hostMountPath }}
             - name: data-pvc
-              mountPath: {{ .Values.copyContainer.volumeMountPath }}
+              mountPath: {{ .Values.job.volumeMountPath }}
       restartPolicy: Never
       volumes:
         - name: host-pv

@@ -11,9 +11,9 @@ pvc:
   storageClass: standard
 
 # Container that performs the copy operation
-copyContainer:
+job:
   image: busybox
-  command: ["/bin/sh", "-c"]  # Use the full path to sh
-  args: ["cp -r /host/* /data"]  # Command to copy files
+  command: ["/bin/sh"]
+  args: ["-c", "cp -r /host/* /data"]
   volumeMountPath: /data
   hostMountPath: /host
