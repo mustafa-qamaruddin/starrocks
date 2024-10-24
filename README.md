@@ -1,4 +1,4 @@
-**⚠️ Warning: If you need to expose multiple ports simultaneously (e.g., port 8030 for StarRocks and another port for Grafana), consider using Docker Compose instead of Kubernetes for easier port management. **
+**⚠️ Warning: If you need to expose multiple ports simultaneously (e.g., port 8030 for StarRocks and another port for Grafana), consider using Docker Compose instead of Kubernetes for easier port management. `kubectl expose pod testing-pod — port=80 — type=NodePort` **
 
 
 **⚠️ Warning: Configurations for StarRocks Frontend/Backend could better be loaded from external files, but that requires forking the main chart, since Helm functions work only inside chart and not values files. https://helm.sh/docs/chart_template_guide/accessing_files/ **
@@ -69,9 +69,16 @@ kube-starrocks-fe-service:8030
 Another possibility is to mount the resources directly with a host mount path to the superset volumes
 Separation for future extensibility to add a kubernetes operator and for illustrative prototype purpose
 Separation for ease of testing without messing around with the Superset helm chart
+The question is how do you get the resources dats folder mounted on the prod cluster? via Flux?
 
 ```
+
+minikube mount /Users/mustafa/Documents/starrocks-project/superset-initialization/config:/mnt/superset-initialization
+minikube mount /Users/mustafa/Documents/target:/mnt/target
+
+
 helm install superset-init-job ./superset-initialization
+helm uninstall superset-init-job
 ```
 
 # Superset Links

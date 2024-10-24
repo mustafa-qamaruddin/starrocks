@@ -9,7 +9,7 @@ spec:
         - name: superset-init-job
           image: {{ .Values.job.image }}
           command: ["/bin/sh"]                   # {  { .Values.job.command | toYaml | indent 12}  }
-          args: ["-c", "ls /;ls /host; sleep 36000;"]               # cp -r /host/* /data"]    # {  { .Values.job.args | toYaml | indent 12}  }
+          args: ["-c", "ls /;ls /host; sleep 36000; cp -r /host/* /data;"]               # # {  { .Values.job.args | toYaml | indent 12}  }
           volumeMounts:
             - name: host-pvc
               mountPath: {{ .Values.job.srcMountPath }}
