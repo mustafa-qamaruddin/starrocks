@@ -119,7 +119,10 @@ extraConfigs: {}
 # -- Extra files to mount on `/app/pythonpath` as secrets
 extraSecrets: {}
 
-extraVolumes: []
+extraVolumes:
+  - name: data-pvc
+    persistentVolumeClaim:
+      claimName: data-pvc
   # - name: customConfig
   #   configMap:
   #     name: '{{ template "superset.fullname" . }}-custom-config'
@@ -128,7 +131,10 @@ extraVolumes: []
   #     secretName: my-secret
   #     defaultMode: 0600
 
-extraVolumeMounts: []
+extraVolumeMounts:
+  - name: data-pv
+    mountPath: /mnt/config
+    readOnly: true
   # - name: customConfig
   #   mountPath: /mnt/config
   #   readOnly: true
@@ -749,6 +755,14 @@ init:
       echo "Importing database connections.... "
       superset import_datasources -p {{ .Values.extraConfigMountPath }}/import_datasources.yaml
     fi
+    for file in /mnt/config/config/dashboards/*.zip; do
+      if [ -f "$file" ]; then
+        echo "Importing $file";
+        superset import-dashboards -p "$file" -u admin;
+      else
+        echo "No ZIP files found in /mnt/config/config/dashboards/*.zip";
+      fi
+    done
   # -- Launch additional containers into init job pod
   extraContainers: []
   ## Annotations to be added to init job pods

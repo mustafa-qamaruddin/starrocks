@@ -87,6 +87,28 @@ helm install superset-init-job ./superset-initialization
 helm uninstall superset-init-job
 ```
 
+Then, mount the extra volume where the resources/dashboards are located
+
+```
+extraVolumes:
+  - name: data-pvc
+    persistentVolumeClaim:
+      claimName: data-pvc
+      
+extraVolumeMounts:
+  - name: data-pv
+    mountPath: /mnt/config
+    readOnly: true
+```
+
+Then, load the dashboards from the volume into superset with init script
+
+```
+  # -- A Superset init script
+  # @default -- a script to create admin user and initialize roles
+  initscript: |-
+```
+
 
 # Superset Links
 
