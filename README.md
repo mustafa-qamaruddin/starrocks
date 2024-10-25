@@ -16,8 +16,7 @@
 
 # StarRocks Setup
 
-´´´
-
+```
 minikube start --memory 7854 --cpus=4 --driver=docker
 
 minikube config set cpus 4
@@ -33,8 +32,7 @@ helm upgrade --install -f  /Users/mustafa/Documents/starrocks-project/starrocks/
 kubectl --namespace default get starrockscluster -l "cluster=kube-starrocks"
 
 kubectl port-forward pods/kube-starrocks-fe-0 9030:9030
-
-´´´
+```
 
 # StarRocks Links
 
@@ -203,6 +201,7 @@ extraSecretEnv:
 ```
 
 ## Superset Import Dashboards - command failed validation
+### if dashboard exists, it's overwritten.
 
 https://github.com/apache/superset/issues/26130
 
@@ -210,5 +209,7 @@ https://github.com/apache/superset/issues/26130
 You are importing one or more dashboards that already exist. Overwriting might cause you to lose some of your work. Are you sure you want to overwrite?
 
 cli command
-superset import-dashboard --overwrite
+Updating dashboards Dashboard<4>
+2024-10-25 16:02:30,812:INFO:superset.models.helpers:Updating dashboards Dashboard<4>
+Loaded your LOCAL configuration at [/app/pythonpath/superset_config.py]
 ```
