@@ -62,7 +62,7 @@ Add StarRocks Connection:
 
 ```
 kube-starrocks-fe-service:8030
-``````
+```
 
 # Superset Init Container
 
@@ -94,7 +94,7 @@ extraVolumes:
   - name: data-pvc
     persistentVolumeClaim:
       claimName: data-pvc
-      
+
 extraVolumeMounts:
   - name: data-pv
     mountPath: /mnt/config
@@ -109,13 +109,12 @@ Then, load the dashboards from the volume into superset with init script
   initscript: |-
 ```
 
-
 # Superset Links
 
 * https://superset.apache.org/docs/installation/kubernetes/
 * https://github.com/apache/superset/blob/master/helm/superset/values.yaml
 * https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
-
+* https://superset.apache.org/docs/configuration/importing-exporting-datasources/
 
 # S3 Proxy
 
@@ -201,4 +200,15 @@ extraSecretEnv:
   # GOOGLE_SECRET: ...
   #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
   SUPERSET_SECRET_KEY: 'super_random_secret_key'
+```
+
+## Superset Import Dashboards - command failed validation
+
+https://github.com/apache/superset/issues/26130
+
+```
+You are importing one or more dashboards that already exist. Overwriting might cause you to lose some of your work. Are you sure you want to overwrite?
+
+cli command
+superset import-dashboard --overwrite
 ```

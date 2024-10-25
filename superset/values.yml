@@ -120,7 +120,7 @@ extraConfigs: {}
 extraSecrets: {}
 
 extraVolumes:
-  - name: data-pvc
+  - name: data-pv
     persistentVolumeClaim:
       claimName: data-pvc
   # - name: customConfig
@@ -755,6 +755,7 @@ init:
       echo "Importing database connections.... "
       superset import_datasources -p {{ .Values.extraConfigMountPath }}/import_datasources.yaml
     fi
+    superset import-dashboards --help
     for file in /mnt/config/config/dashboards/*.zip; do
       if [ -f "$file" ]; then
         echo "Importing $file";
