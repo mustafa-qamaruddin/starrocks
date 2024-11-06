@@ -284,6 +284,10 @@ starrocks:
       # containerPort in the service configuration. If both containerPort and name are specified, containerPort takes precedence.
       # For fe, port name can be http, query, rpc, edit-log, and their default container port is 8030, 9030, 9020, 9010.
       ports: []
+        #- nodePort: 300001
+        # containerPort: 8030
+        #- nodePort: 300002
+        # containerPort: 9030         
         # e.g. specify a dedicated node port for fe service by containerPort.
         # - nodePort: 30030 # The range of valid ports is 30000-32767
         #   containerPort: 8030 # The port exported on the container

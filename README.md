@@ -40,13 +40,6 @@ kubectl --namespace default get starrockscluster -l "cluster=kube-starrocks"
 kubectl port-forward pods/kube-starrocks-fe-0 9030:9030
 ```
 
-# StarRocks Node Ports
-
-```
-kubectl expose service kube-starrocks-fe-service --port=9030 --target-port=9030 --type=NodePort
-kubectl expose service kube-starrocks-fe-service --port=8030 --target-port=8030 --type=NodePort
-```
-
 # StarRocks Links
 
 - https://github.com/StarRocks/starrocks-kubernetes-operator/blob/main/doc/local_installation_how_to.md

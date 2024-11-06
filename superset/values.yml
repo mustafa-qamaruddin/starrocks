@@ -238,11 +238,11 @@ resources:
   # The limits below will apply to all Superset components. To set individual resource limitations refer to the pod specific values below.
   # The pod specific values will overwrite anything that is set here.
   limits:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 2000m
+    memory: 2048Mi
   requests:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 2000m
+    memory: 2048Mi
 
 # -- Custom hostAliases for all superset pods
 ## https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
@@ -343,13 +343,13 @@ supersetNode:
     periodSeconds: 15
     successThreshold: 1
   # -- Resource settings for the supersetNode pods - these settings overwrite might existing values from the global resources object defined above.
-  resources: {}
-    # limits:
-    #  cpu: 100m
-    #  memory: 128Mi
-    # requests:
-    #  cpu: 100m
-    #  memory: 128Mi
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 2048Mi
+    requests:
+      cpu: 200m
+      memory: 2048Mi
   podSecurityContext: {}
   containerSecurityContext: {}
   strategy: {}
@@ -415,11 +415,11 @@ supersetWorker:
   # -- Resource settings for the supersetWorker pods - these settings overwrite might existing values from the global resources object defined above.
   resources: 
     limits:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 2000m
+      memory: 2048Mi
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 2000m
+      memory: 2048Mi
   podSecurityContext: {}
   containerSecurityContext: {}
   strategy: {}
@@ -495,11 +495,11 @@ supersetCeleryBeat:
   # -- Resource settings for the CeleryBeat pods - these settings overwrite might existing values from the global resources object defined above.
   resources:
     limits:
-      cpu: 100m
-      memory: 256Mi
+      cpu: 1000m
+      memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 256Mi
+      cpu: 1000m
+      memory: 512Mi
   podSecurityContext: {}
   containerSecurityContext: {}
   # -- Set priorityClassName for CeleryBeat pods
